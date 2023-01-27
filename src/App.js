@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import "./App.css";
+import Banner from "./components/Banner";
 import Nav from "./components/Nav";
 
 const Container = styled.main`
@@ -25,6 +26,7 @@ function App() {
   return (
     <Container className="App">
       <Nav />
+      <Banner />
     </Container>
   );
 }
