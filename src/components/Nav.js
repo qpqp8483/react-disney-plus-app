@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router";
 import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 
@@ -57,6 +58,8 @@ const Input = styled.input`
 const Nav = () => {
   const [show, setShow] = useState(false);
   const { pathname } = useLocation();
+  const [searchValue, setSearchValue] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
@@ -73,6 +76,11 @@ const Nav = () => {
     }
   };
 
+  const handleChange = (e) => {
+    setSearchValue(e.target.value);
+    navigate(`/search?q=${e.target.value}`);
+  };
+
   return (
     <NavWrapper show={show}>
       <Logo>
@@ -86,7 +94,13 @@ const Nav = () => {
       {pathname === "/" ? (
         <Login>Login</Login>
       ) : (
-        <Input className="nav__input" type="text" placeholder="검색해주세요." />
+        <Input
+          value={searchValue}
+          onChange={handleChange}
+          className="nav__input"
+          type="text"
+          placeholder="검색해주세요."
+        />
       )}
     </NavWrapper>
   );
